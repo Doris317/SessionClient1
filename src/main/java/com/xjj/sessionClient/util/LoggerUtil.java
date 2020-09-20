@@ -9,24 +9,25 @@ import java.io.IOException;
 
 /**
  * @ClassName: Slf4jLogger
+ * 进行日志输出的配置
  */
-public class Slf4jLogger extends feign.Logger {
+public class LoggerUtil extends feign.Logger {
 
     private final Logger logger;
 
-    public Slf4jLogger() {
+    public LoggerUtil() {
         this(feign.Logger.class);
     }
 
-    public Slf4jLogger(Class<?> clazz) {
+    public LoggerUtil(Class<?> clazz) {
         this(LoggerFactory.getLogger(clazz));
     }
 
-    public Slf4jLogger(String name) {
+    public LoggerUtil(String name) {
         this(LoggerFactory.getLogger(name));
     }
 
-    Slf4jLogger(Logger logger) {
+    public LoggerUtil(Logger logger) {
         this.logger = logger;
     }
 

@@ -1,0 +1,142 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: LoggerUtil</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.xjj.sessionClient.util</a> ]
+</div>
+
+<h1>Coverage Summary for Class: LoggerUtil (com.xjj.sessionClient.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LoggerUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    28.6%
+  </span>
+  <span class="absValue">
+    (2/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    27.8%
+  </span>
+  <span class="absValue">
+    (5/ 18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.xjj.sessionClient.util;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import feign.Request;
+<i>4</i>&nbsp;import feign.Response;
+<i>5</i>&nbsp;import org.slf4j.Logger;
+<i>6</i>&nbsp;import org.slf4j.LoggerFactory;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import java.io.IOException;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;/**
+<i>11</i>&nbsp; * @ClassName: Slf4jLogger
+<i>12</i>&nbsp; * 进行日志输出的配置
+<i>13</i>&nbsp; */
+<i>14</i>&nbsp;public class LoggerUtil extends feign.Logger {
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    private final Logger logger;
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;    public LoggerUtil() {
+<b class="nc"><i>19</i>&nbsp;        this(feign.Logger.class);</b>
+<b class="nc"><i>20</i>&nbsp;    }</b>
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    public LoggerUtil(Class&lt;?&gt; clazz) {
+<b class="fc"><i>23</i>&nbsp;        this(LoggerFactory.getLogger(clazz));</b>
+<b class="fc"><i>24</i>&nbsp;    }</b>
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    public LoggerUtil(String name) {
+<b class="nc"><i>27</i>&nbsp;        this(LoggerFactory.getLogger(name));</b>
+<b class="nc"><i>28</i>&nbsp;    }</b>
+<i>29</i>&nbsp;
+<b class="fc"><i>30</i>&nbsp;    public LoggerUtil(Logger logger) {</b>
+<b class="fc"><i>31</i>&nbsp;        this.logger = logger;</b>
+<b class="fc"><i>32</i>&nbsp;    }</b>
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;    @Override
+<i>35</i>&nbsp;    protected void logRequest(String configKey, Level logLevel, Request request) {
+<b class="nc"><i>36</i>&nbsp;        if (logger.isDebugEnabled()) {</b>
+<b class="nc"><i>37</i>&nbsp;            super.logRequest(configKey, logLevel, request);</b>
+<i>38</i>&nbsp;        }
+<b class="nc"><i>39</i>&nbsp;    }</b>
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;    @Override
+<i>42</i>&nbsp;    protected Response logAndRebufferResponse(String configKey,
+<i>43</i>&nbsp;                                              Level logLevel,
+<i>44</i>&nbsp;                                              Response response,
+<i>45</i>&nbsp;                                              long elapsedTime)
+<i>46</i>&nbsp;            throws IOException {
+<b class="nc"><i>47</i>&nbsp;        if (logger.isDebugEnabled()) {</b>
+<b class="nc"><i>48</i>&nbsp;            return super.logAndRebufferResponse(configKey, logLevel, response, elapsedTime);</b>
+<i>49</i>&nbsp;        }
+<b class="nc"><i>50</i>&nbsp;        return response;</b>
+<i>51</i>&nbsp;    }
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;    @Override
+<i>54</i>&nbsp;    protected void log(String configKey, String format, Object... args) {
+<b class="nc"><i>55</i>&nbsp;        if (logger.isDebugEnabled()) {</b>
+<b class="nc"><i>56</i>&nbsp;            logger.debug(String.format(methodTag(configKey) + format, args));</b>
+<i>57</i>&nbsp;        }
+<b class="nc"><i>58</i>&nbsp;    }</b>
+<i>59</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-09-20 22:37</div>
+</div>
+</body>
+</html>

@@ -11,8 +11,8 @@ import javax.xml.bind.Marshaller;
 
 import com.xjj.sessionClient.App;
 import com.xjj.sessionClient.api.SessionApi;
-import com.xjj.sessionClient.util.JaxbWriteXml;
-import com.xjj.sessionClient.util.Slf4jLogger;
+import com.xjj.sessionClient.util.JaxbWriteXmlUtil;
+import com.xjj.sessionClient.util.LoggerUtil;
 import org.apache.log4j.Logger;
 
 import com.xjj.sessionClient.util.PropertiesUtil;
@@ -27,6 +27,7 @@ import feign.jaxb.JAXBEncoder;
 public class SessionClient {
     int id;
     int time = 5;
+    // 日志打印
     private static Logger logger = Logger.getLogger(SessionClient.class);
     PropertiesUtil propertiesUtil = new PropertiesUtil(App.class.getClassLoader()
             .getResourceAsStream("sessionClient.properties"));
@@ -45,9 +46,9 @@ public class SessionClient {
 
     private void start() throws JAXBException {
         post(ActionType.START);
-        logger.info(" id:" + id + "session已开始");
+        logger.info("session序号:" + id + " 已开始");
         Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
+        TimerTask task = new TimerTask() {
             @Override
             public void run() {
                 ExecutorService executorService = Executors.newCachedThreadPool();
@@ -65,10 +66,9 @@ public class SessionClient {
                     executorService.shutdown();
                     timer.cancel();
                 }
-
             }
-        }, time * 1000);
-
+        };
+        timer.schedule(task, time * 1000);
     }
 
     private void stop() throws JAXBException {
@@ -77,7 +77,7 @@ public class SessionClient {
     }
 
     private void post(ActionType type) throws JAXBException {
-        Marshaller marshaller = JaxbWriteXml.getMarshaller(DeliverySessionCreationType.class);
+        Marshaller marshaller = JaxbWriteXmlUtil.getMarshaller(DeliverySessionCreationType.class);
         DeliverySessionCreationType demo = new DeliverySessionCreationType();
         demo.setDeliverySessionId(id);
         demo.setAction(type);
@@ -89,7 +89,7 @@ public class SessionClient {
         final StringWriter stringWriter = new StringWriter();
         marshaller.marshal(demo, stringWriter);
         try {
-            Feign.builder().logger(new Slf4jLogger(SessionClient.class)).encoder(new JAXBEncoder(null))
+            Feign.builder().logger(new LoggerUtil(SessionClient.class)).encoder(new JAXBEncoder(null))
                     .decoder(new JAXBDecoder(null)).target(SessionApi.class, url)
                     .sessionTest(stringWriter.toString(), id);
             logger.info("\nurl:" + url + " body:\n" + stringWriter.toString() + " 连接成功 ");

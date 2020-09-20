@@ -16,11 +16,13 @@ public class App {
 
     public static void main(String[] args) {
         PropertiesUtil propertiesUtil = new PropertiesUtil(App.class.getClassLoader().getResourceAsStream("sessionClient.properties"));
+        //   concurrency是为了动态调节并发数，所以存储在配置文件中
         int concurrency = Integer.parseInt(propertiesUtil.get("Concurrency"));
         int time = Integer.parseInt(propertiesUtil.get("time"));
         ExecutorService fixedThreadPool = Executors.newFixedThreadPool(concurrency);
-        int count = 10;
-        for (int i = 0; i < 10; i++) {
+        //  count是实际请求数
+        int count = 100;
+        for (int i = 0; i < count; i++) {
             final int id = i;
             fixedThreadPool.execute(() -> new SessionClient(id, time));
         }

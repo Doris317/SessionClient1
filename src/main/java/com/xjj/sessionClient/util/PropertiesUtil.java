@@ -14,14 +14,10 @@ public class PropertiesUtil {
 
     private Properties props;
 
-    public PropertiesUtil(InputStream inputStream) {
-        readProperties(inputStream);
-    }
-
     /**
-     * 加载配置文件
+     * 在构造函数中加载配置文件
      */
-    private void readProperties(InputStream inputStream) {
+    public PropertiesUtil(InputStream inputStream) {
         try {
             props = new Properties();
             props.load(inputStream);

@@ -1,0 +1,64 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: SessionApi</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.xjj.sessionClient.api</a> ]
+</div>
+
+<h1>Coverage Summary for Class: SessionApi (com.xjj.sessionClient.api)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">SessionApi</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.xjj.sessionClient.api;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import feign.Body;
+<i>4</i>&nbsp;import feign.Headers;
+<i>5</i>&nbsp;import feign.Param;
+<i>6</i>&nbsp;import feign.RequestLine;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;/**
+<i>9</i>&nbsp; * @ClassName: SessionApi
+<i>10</i>&nbsp; * 请求行，请求头，请求体
+<i>11</i>&nbsp; */
+<i>12</i>&nbsp;public interface SessionApi {
+<i>13</i>&nbsp;    @RequestLine(&quot;POST /nbi/deliverysession?id={DeliverySessionId}&quot;)
+<i>14</i>&nbsp;    @Headers(&quot;Content-Type: application/xml&quot;)
+<i>15</i>&nbsp;    @Body(&quot;{body}&quot;)
+<i>16</i>&nbsp;    void sessionTest(@Param(&quot;body&quot;) String body, @Param(&quot;DeliverySessionId&quot;) int id);
+<i>17</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-09-20 22:37</div>
+</div>
+</body>
+</html>

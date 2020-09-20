@@ -5,9 +5,9 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
 /**
- * @ClassName: JaxbWriteXml
+ * @ClassName: JaxbWriteXmlUtil
  */
-public class JaxbWriteXml {
+public class JaxbWriteXmlUtil {
     public static <T> Marshaller getMarshaller(Class<T> c) throws JAXBException {
 
         JAXBContext context = JAXBContext.newInstance(c);
